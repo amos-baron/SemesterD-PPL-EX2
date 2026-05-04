@@ -37,6 +37,7 @@ int special_commands(cmdLine *pCmdLine) {
         if (kill(-atoi(pCmdLine->arguments[1]), SIGKILL) < 0) perror("nuke failed");
         return 1;
     }
+    return 0;
 }
 
 void execute(cmdLine *pCmdLine) {
