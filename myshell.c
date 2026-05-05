@@ -17,7 +17,7 @@ int debug = 0;
 int special_commands(cmdLine *pCmdLine) {
     if (strcmp(pCmdLine->arguments[0], "cd") == 0) {
         if (chdir(pCmdLine->arguments[1]) < 0) {
-            perror("cd f");
+            perror("cd failed");
         }
         return 1;
     }

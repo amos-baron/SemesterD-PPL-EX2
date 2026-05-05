@@ -6,7 +6,7 @@
 
 int main(int argc, char **argv) {
     if (argc < 2) {
-        fprintf(stderr, "Usage: %s <message>\n", argv[0]);
+        fprintf(stderr, "Too few arguments");
         return 1;
     }
 
@@ -14,23 +14,23 @@ int main(int argc, char **argv) {
     char buffer[1024];
 
     if (pipe(pipefd) == -1) {
-        perror("pipe");
+        perror("bad pipe");
         exit(1);
     }
 
     pid_t pid = fork();
 
-    if (pid == 0) { // Child: Reads from pipe
-        close(pipefd[1]); // Close unused write end
+    if (pid == 0) { 
+        close(pipefd[1]); 
         read(pipefd[0], buffer, sizeof(buffer));
         printf("Child received: %s\n", buffer);
         close(pipefd[0]);
         _exit(0);
-    } else { // Parent: Writes to pipe
-        close(pipefd[0]); // Close unused read end
+    } else {
+        close(pipefd[0]); 
         write(pipefd[1], argv[1], strlen(argv[1]) + 1);
         close(pipefd[1]);
-        wait(NULL); // Wait for child to finish
+        wait(NULL);     
     }
 
     return 0;

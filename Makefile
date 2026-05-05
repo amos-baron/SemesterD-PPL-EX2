@@ -3,23 +3,18 @@ CFLAGS = -m32 -g -Wall
 
 all: myshell looper Printers mypipe
 
-# Explicit rule for myshell
 myshell: myshell.o LineParser.o
 	$(CC) $(CFLAGS) myshell.o LineParser.o -o myshell
 
-# Explicit rule for looper
 looper: looper.o
 	$(CC) $(CFLAGS) looper.o -o looper
 
-# Explicit rule for Printers
 Printers: Printers.o
 	$(CC) $(CFLAGS) Printers.o -o Printers
 
-# Explicit rule for mypipe
 mypipe: mypipe.o
 	$(CC) $(CFLAGS) mypipe.o -o mypipe
 
-# Object file rules
 myshell.o: myshell.c LineParser.h
 	$(CC) $(CFLAGS) -c myshell.c -o myshell.o
 
